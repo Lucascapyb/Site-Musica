@@ -130,6 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Usamos decodeURI para evitar problemas com espaços ou caracteres especiais na URL
         let currentIndex = allSongs.findIndex(card => card.dataset.src === currentSongPath);
         
+        // Se nenhuma música estiver tocando, começa da primeira
+        if (currentIndex === -1) currentIndex = -1; 
+        
         // Vai para a próxima ou volta para a primeira se for a última
         let nextIndex = (currentIndex + 1) % allSongs.length;
         loadAndPlay(allSongs[nextIndex]);
@@ -141,6 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (allSongs.length === 0) return;
 
         let currentIndex = allSongs.findIndex(card => card.dataset.src === currentSongPath);
+        
+        // Se nada estiver tocando e clicar em anterior, começa da última
+        if (currentIndex === -1) currentIndex = 0;
         
         // Se for a primeira música, volta para a última. Se não, subtrai 1.
         let prevIndex = (currentIndex - 1 + allSongs.length) % allSongs.length;
